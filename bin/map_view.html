@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMgY="
+     crossorigin=""/>    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100vw; background: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        var map;
+        var droneMarker;
+        var destMarker;
+        var routeLine;
+        
+        // Cheia LocationIQ
+        var apiKey = 'pk.158719224b8587f1e2f1cd81fed13147'; ///SA NU O LASI AICI!!! CA AI SUPT-O, o faci variabila de environment pe serverul tau. semnat, firi
+
+        function initMap() {
+            // Initializare Harta
+            map = L.map('map').setView([44.4268, 26.1025], 13);
+
+            // Stratul de harta (Tiles) de la LocationIQ
+            L.tileLayer('https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png?key=' + apiKey, {
+                attribution: '© LocationIQ, © OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Fix pentru redimensionare
+            setTimeout(function(){ map.invalidateSize(); }, 500);
+        }
+
+        // Functia cautata de Java - TREBUIE SA FIE AICI
+        function setDronePosition(lat, lon, name) {
+            if(map) map.invalidateSize();
+            
+            if (droneMarker) map.removeLayer(droneMarker);
+            
+            var greenIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+            });
+            
+            droneMarker = L.marker([lat, lon], {icon: greenIcon}).addTo(map).bindPopup("<b>Baza: " + name + "</b>").openPopup();
+            map.setView([lat, lon], 13);
+        }
+
+        function setDestination(lat, lon, address) {
+            if (destMarker) map.removeLayer(destMarker);
+            if (routeLine) map.removeLayer(routeLine);
+
+            var redIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+            });
+
+            destMarker = L.marker([lat, lon], {icon: redIcon}).addTo(map).bindPopup("<b>Destinatie:</b><br>" + address).openPopup();
+
+            if(droneMarker) {
+                var latlngs = [droneMarker.getLatLng(), [lat, lon]];
+                routeLine = L.polyline(latlngs, {color: 'blue', weight: 4, dashArray: '10, 10'}).addTo(map);
+                map.fitBounds(routeLine.getBounds(), {padding: [50, 50]});
+            }
+        }
+
+        // Pornim harta
+        initMap();
+    </script>
+</body>
+</html>

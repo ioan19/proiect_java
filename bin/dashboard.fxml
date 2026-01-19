@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="dronefleet.DashboardController">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color:#2b3e50;">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <Label text="Dashboard - Drone Fleet Manager" style="-fx-text-fill:white; -fx-font-size:18;"/>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button text="Logout" onAction="#onLogout" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="12" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Lista dronelor" style="-fx-font-size:16; -fx-font-weight:bold;" />
+
+            <TableView fx:id="droneTable" prefHeight="350" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                    <TableColumn fx:id="colModel" text="Model" prefWidth="140" />
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120" />
+                    <TableColumn fx:id="colCapacity" text="Capacitate" prefWidth="120" />
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER">
+    				<Button text="Adaugă dronă" onAction="#addDrone"/>
+    				<Button text="Editează" onAction="#editDrone"/> <Button text="Șterge dronă" onAction="#removeDrone"/>
+    				<Separator orientation="VERTICAL" />
+    				<Button text="Planifică Zbor (Hartă)" onAction="#openMap" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/> 
+    			</HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
