@@ -1,18 +1,18 @@
 package dronefleet;
 
 public class Drone {
-    private String id;
+    private int id; // Acum este INT conform bazei de date
     private String model;
-    private String type; // transport/survey
-    private String status; // activa, in_livrare, mentenanta, inactiva
+    private String type; 
+    private String status;
     private double maxPayload;
     private double autonomy;
     
-    // Timpi limita (milisecunde)
+    // Timpi limita
     private long missionEndTime = 0;
     private long maintenanceEndTime = 0;
 
-    public Drone(String id, String model, String type, String status, double maxPayload, double autonomy) {
+    public Drone(int id, String model, String type, String status, double maxPayload, double autonomy) {
         this.id = id;
         this.model = model;
         this.type = type;
@@ -21,12 +21,10 @@ public class Drone {
         this.autonomy = autonomy;
     }
 
-    // --- GETTERS & SETTERS ---
-    public String getId() { return id; }
+    public int getId() { return id; }
     public String getModel() { return model; }
     public String getType() { return type; }
     public String getStatus() { 
-        // Verificam automat daca a expirat timpul de cand o cerem
         checkAutoStatus();
         return status; 
     }
@@ -37,30 +35,23 @@ public class Drone {
     public void setMissionEndTime(long time) { this.missionEndTime = time; }
     public void setMaintenanceEndTime(long time) { this.maintenanceEndTime = time; }
 
-    // --- LOGICA AUTOMATA DE STATUS ---
     public void checkAutoStatus() {
         long now = System.currentTimeMillis();
-
-        // 1. Verificare Misiune
-        if ("in_livrare".equals(status) && missionEndTime > 0) {
-            if (now >= missionEndTime) {
-                status = "activa";
-                missionEndTime = 0;
-            }
+        if ("in_livrare".equals(status) && missionEndTime > 0 && now >= missionEndTime) {
+            status = "activa";
+            missionEndTime = 0;
+            // Aici ar trebui update si in DB in mod ideal
+            DatabaseManager.updateDroneStatus(id, "activa");
         }
-        
-        // 2. Verificare Mentenanta
-        if ("mentenanta".equals(status) && maintenanceEndTime > 0) {
-            if (now >= maintenanceEndTime) {
-                status = "activa";
-                maintenanceEndTime = 0;
-            }
+        if ("mentenanta".equals(status) && maintenanceEndTime > 0 && now >= maintenanceEndTime) {
+            status = "activa";
+            maintenanceEndTime = 0;
+            DatabaseManager.updateDroneStatus(id, "activa");
         }
     }
 
-    // Text pentru coloana "Timp Rămas"
     public String getTimeRemainingDisplay() {
-        checkAutoStatus(); // Update inainte de afisare
+        checkAutoStatus();
         long now = System.currentTimeMillis();
         long end = 0;
 
@@ -79,5 +70,5 @@ public class Drone {
     }
     
     @Override
-    public String toString() { return model + " (" + type + ")"; }
+    public String toString() { return model + " (ID: " + id + ")"; }
 }
