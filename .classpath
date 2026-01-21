@@ -7,45 +7,46 @@
 	</classpathentry>
 	<classpathentry excluding="resources/" kind="src" path="src"/>
 	<classpathentry kind="src" path="src/resources"/>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.base.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.controls.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.controls.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.fxml.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.fxml.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.graphics.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.graphics.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.media.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.media.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.swing.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.swing.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx.web.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx.web.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/javafx-sdk-21.0.9/lib/javafx-swt.jar">
+	<classpathentry exported="true" kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\javafx-swt.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:\Users\corju\eclipse-workspace\DroneFleetManager\lib\mysql-connector-j-9.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
